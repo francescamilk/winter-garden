@@ -7,7 +7,13 @@
     <div class="plantFlex mt-2 pb-5">
         <% @plants.each do |plant| %>
             <div class="col-4 plantCard" style="background-image: url(<%= plant.image_url %>)">
-                <p><%= plant.name %></p>
+                <div>
+                    <p><%= plant.name %></p>
+                    <%= link_to "+", new_garden_plant_plant_tag_path(@garden, plant) %>
+                    <% plant.tags.each do |tag| %>
+                        <span><%= tag.name %></span>
+                    <% end %>
+                </div>
             </div>
         <% end %>
     </div>
