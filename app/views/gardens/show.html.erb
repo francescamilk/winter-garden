@@ -1,3 +1,16 @@
 <div class="gardenBanner" style="background-image: url(<%= @garden.image_url %>)">
     <h1><%= @garden.name %></h1>
 </div>
+
+<div class="container mt-3">
+    <h3>The Plants</h3>
+    <div class="plantFlex mt-2 pb-5">
+        <% @plants.each do |plant| %>
+            <div class="col-4 plantCard" style="background-image: url(<%= plant.image_url %>)">
+                <p><%= plant.name %></p>
+            </div>
+        <% end %>
+    </div>
+    <%= link_to "Add plant", new_garden_plant_path(@garden) %>
+</div>
+

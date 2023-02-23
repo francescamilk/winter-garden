@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root to: 'gardens#home'
 
-  resources :gardens, only: [ :index, :show ]
+  resources :gardens, only: [ :index, :show ] do
+    # get 'gardens/:garden_id/plants/new
+    resources :plants, only: [ :new, :create ]
+  end
 end
