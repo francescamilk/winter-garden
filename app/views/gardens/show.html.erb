@@ -8,17 +8,17 @@
     <h3>The Plants</h3>
     <div class="plantFlex mt-2 pb-5">
         <% @plants.each do |plant| %>
-            <div class="col-4 plantCard" style="background-image: url(<%= plant.image_url %>)">
+            <div class="col-4 plantCard rounded" style="background-image: url(<%= plant.image_url %>)">
                 <div>
-                    <p><%= plant.name %></p>
+                    <h4><%= plant.name %></p>
                     <div class="d-flex">
                         <% plant.tags.each do |tag| %>
-                            <span class="plant-tag"><%= tag.name %></span>
+                            <span><p><%= tag.name %>&nbsp;</p></span>
                         <% end %>
                         <div data-controller="form">
                             <p data-action="click->form#popUp" style="cursor: pointer;">➕</p>
-                            <div class="hidden pop-up" data-form-target="plantform">
-                            <div class="form-container">
+                            <div class="hidden popUp" data-form-target="plantform">
+                            <div class="formContainer">
                                 <div class="text-center">
                                     <h1>Add Tag</h1>
                                     <%= simple_form_for [plant, @p_tag] do |f| %>
@@ -38,16 +38,7 @@
             </div>
         <% end %>
     </div>
-    <%= link_to "Add plant", new_garden_plant_path(@garden) %>
+    <%= link_to "➕🌴", new_garden_plant_path(@garden) %>
 </div>
 
 <%= render 'plant_tags/form' %>
-
-<script>
-    const banner = document.getElementById('banner');
-    const arrowRight = document.getElementById('right');
-
-    arrowRight.addEventListener('click', (e) => {
-        banner.classList.add('newImage')
-    });
-</script>

@@ -1,0 +1,19 @@
+.formContainer {
+    background: white;
+    border-radius: 6px;
+    padding: 4rem;
+}
+
+.popUp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .5);
+    @include flexCenter;
+}
+
+.hidden {
+    display: none;
+}
