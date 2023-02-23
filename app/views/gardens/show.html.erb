@@ -1,5 +1,7 @@
-<div class="gardenBanner" style="background-image: url(<%= @garden.image_url %>)">
+<div class="gardenBanner" id="banner" style="background-image: url(<%= @garden.image_url %>)">
+    <i class="fa-solid fa-arrow-left" id="left"></i>
     <h1><%= @garden.name %></h1>
+    <i class="fa-solid fa-arrow-right" id="right"></i>
 </div>
 
 <div class="container mt-3">
@@ -9,10 +11,29 @@
             <div class="col-4 plantCard" style="background-image: url(<%= plant.image_url %>)">
                 <div>
                     <p><%= plant.name %></p>
-                    <%= link_to "+", new_garden_plant_plant_tag_path(@garden, plant) %>
-                    <% plant.tags.each do |tag| %>
-                        <span><%= tag.name %></span>
-                    <% end %>
+                    <div class="d-flex">
+                        <% plant.tags.each do |tag| %>
+                            <span class="plant-tag"><%= tag.name %></span>
+                        <% end %>
+                        <div data-controller="form">
+                            <p data-action="click->form#popUp" style="cursor: pointer;">➕</p>
+                            <div class="hidden pop-up" data-form-target="plantform">
+                            <div class="form-container">
+                                <div class="text-center">
+                                    <h1>Add Tag</h1>
+                                    <%= simple_form_for [plant, @p_tag] do |f| %>
+                                        <div class="d-flex flex-column">
+                                            <div class="text-start d-flex flex-column">
+                                                <%= f.collection_check_boxes :tag_id, Tag.all, :id, :name %>
+                                            </div>
+                                            <%= f.submit "Add!", class: "mt-4" %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         <% end %>
@@ -20,3 +41,13 @@
     <%= link_to "Add plant", new_garden_plant_path(@garden) %>
 </div>
 
+<%= render 'plant_tags/form' %>
+
+<script>
+    const banner = document.getElementById('banner');
+    const arrowRight = document.getElementById('right');
+
+    arrowRight.addEventListener('click', (e) => {
+        banner.classList.add('newImage')
+    });
+</script>

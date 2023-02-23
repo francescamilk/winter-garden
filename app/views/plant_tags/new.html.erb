@@ -1,4 +1,4 @@
-<h1>Add a tag to <%= @plant.name %></h1>
+<h3>Add a tag</h3>
 <%= simple_form_for [ @garden, @plant, @p_tag ] do |f| %>
     <%= f.collection_check_boxes :tag_id, Tag.all, :id, :name %>
     <%= f.submit %>
